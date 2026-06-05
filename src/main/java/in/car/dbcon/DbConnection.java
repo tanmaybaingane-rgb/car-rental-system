@@ -6,22 +6,13 @@ import java.sql.DriverManager;
 public class DbConnection {
 
     private static final String URL =
-            System.getenv().getOrDefault(
-                    "DB_URL",
-                    "jdbc:mysql://localhost:3306/car_rental_db"
-            );
+            "jdbc:mysql://localhost:3306/car_rental_db";
 
     private static final String USER =
-            System.getenv().getOrDefault(
-                    "DB_USER",
-                    "root"
-            );
+            "root";
 
     private static final String PASSWORD =
-            System.getenv().getOrDefault(
-                    "DB_PASSWORD",
-                    ""
-            );
+            "";
 
     public static Connection getConnection() {
 
