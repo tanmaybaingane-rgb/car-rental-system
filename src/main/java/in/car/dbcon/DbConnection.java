@@ -6,12 +6,22 @@ import java.sql.DriverManager;
 public class DbConnection {
 
     private static final String URL =
-            "jdbc:mysql://localhost:3306/car_rental_db";
+            System.getenv().getOrDefault(
+                    "DB_URL",
+                    "jdbc:mysql://localhost:3306/car_rental_db"
+            );
 
-    private static final String USER = "root";
+    private static final String USER =
+            System.getenv().getOrDefault(
+                    "DB_USER",
+                    "root"
+            );
 
-    // CHANGE THIS TO YOUR MYSQL PASSWORD
-    private static final String PASSWORD = "Tanmay19#";
+    private static final String PASSWORD =
+            System.getenv().getOrDefault(
+                    "DB_PASSWORD",
+                    "Tanmay19#"
+            );
 
     public static Connection getConnection() {
 
@@ -19,19 +29,29 @@ public class DbConnection {
 
         try {
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            con = DriverManager.getConnection(
-                    URL,
-                    USER,
-                    PASSWORD
+            Class.forName(
+                    "com.mysql.cj.jdbc.Driver"
             );
 
-            System.out.println("Database Connected Successfully");
+            con =
+                    DriverManager.getConnection(
+                            URL,
+                            USER,
+                            PASSWORD
+                    );
 
-        } catch (Exception e) {
+            System.out.println(
+                    "Database Connected Successfully"
+            );
 
-            System.out.println("Database Connection Failed");
+        }
+
+        catch (Exception e) {
+
+            System.out.println(
+                    "Database Connection Failed"
+            );
+
             e.printStackTrace();
         }
 
